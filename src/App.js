@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import allActions from "./redux/actions";
 import logo from "./logo.svg";
 import "./App.css";
+import MyTextArea from "./TextAreaComponent";
 import { CheckboxOperation } from "./Checkboxes";
 
 const App = () => {
@@ -53,6 +54,9 @@ const App = () => {
         <div className='checkboxes-operation'>
           <CheckboxOperation />
         </div> */}
+      </div>
+      <div className='m-3'>
+        <MyTextArea />
       </div>
     </div>
   );
