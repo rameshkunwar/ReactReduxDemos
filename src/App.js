@@ -1,18 +1,45 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import allActions from "./redux/actions";
 import logo from "./logo.svg";
 import "./App.css";
 import MyTextArea from "./TextAreaComponent";
 import { CheckboxOperation } from "./Checkboxes";
+import DropDownWithSelect from "./DropdownWithSelect";
+import ProductList from "./shouldComponentUpdatePerformanceDemo/ProductsList";
+import faker from "faker";
 
 const App = () => {
   const counter = useSelector((state) => state.counter);
   const currentUser = useSelector((state) => state.currentUser);
 
+  const generateRandomList = (length) => {
+    const randomList = [];
+    for (let i = 0; i < length; i++) {
+      randomList.push({
+        id: faker.random.uuid(),
+        title: faker.company.companyName(),
+        url: faker.image.imageUrl(),
+        isFavorite: false
+      });
+    }
+    return randomList;
+  };
+
+  const [products, setProducts] = useState(generateRandomList(600));
+
   const dispatch = useDispatch();
 
   const user = { id: 123, name: "t-rox" };
+
+  const handleProductChange = (changedProduct) => {
+    let newProducts = products.map((product) => {
+      if (product.id == changedProduct.id) {
+        return changedProduct;
+      }
+      return product;
+    });
+  };
 
   useEffect(() => {
     dispatch(allActions.userActions.setUser(user));
@@ -55,8 +82,15 @@ const App = () => {
           <CheckboxOperation />
         </div> */}
       </div>
-      <div className='m-3'>
-        <MyTextArea />
+      <div className='m-3 d-flex justify-content-center'>
+        <DropDownWithSelect />
+        {/* <MyTextArea /> */}
+      </div>
+      <div className='m-3 d-flex justify-content-center'>
+        <ProductList
+          products={products}
+          onProductChange={handleProductChange}
+        />
       </div>
     </div>
   );

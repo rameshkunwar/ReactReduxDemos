@@ -13,14 +13,15 @@ const MyTextArea = (props) => {
 
   useEffect(() => {
     console.log("in use effect");
+    setTextBoxText(props.textAreaValue);
   }, []);
   return (
     <form onSubmit={handleFormSubmit}>
       <div className='form-group'>
-        <label htmlFor='exampleFormControlTextarea1'>Example textarea</label>
+        {/* <label htmlFor='exampleFormControlTextarea1'>Example textarea</label> */}
         <textarea
           onChange={handleTextAreaTextChange}
-          value={textBoxText}
+          defaultValue={textBoxText}
           className='form-control'
           id='exampleFormControlTextarea1'
           rows='3'
