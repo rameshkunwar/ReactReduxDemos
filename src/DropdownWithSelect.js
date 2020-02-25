@@ -1,22 +1,30 @@
 import React, { Component } from "react";
 import Cars from "./DataSeed";
 import MyTextArea from "./TextAreaComponent";
+import RestDataSource from "./DataSource/RestDataSource";
 
 class DropDownWithSelect extends Component {
   constructor(props) {
     super(props);
 
     this.toggleDropdown = this.toggleDropdown.bind(this);
+    this.dataSource = new RestDataSource(
+      "https://the-vehicles-api.herokuapp.com/brands/"
+    );
 
     this.state = {
       isDropDownOpen: false,
       idsOfItemClicked: [],
       isTextAreaOpen: false,
-      valueForTextArea: "this is sample value"
+      valueForTextArea: "this is sample value",
+      carTypes: []
     };
   }
 
-  shouldComponentUpdate() {}
+  // shouldComponentUpdate() {}
+  componentDidMount() {
+    this.dataSource.GetData((data) => this.setState({ carTypes: data }));
+  }
 
   toggleDropdown = (evt) => {
     this.setState({
@@ -57,22 +65,24 @@ class DropDownWithSelect extends Component {
             className='dropdown-menu show'
             aria-labelledby='dropdownMenuButton'
           >
-            {Cars.map((x) => {
-              return (
-                <div
-                  key={x.id}
-                  onClick={() => this.toggleItemClicked(x.id, x.name)}
-                  className='dropdown-item d-inline-flex justify-content-between'
-                >
-                  <span className='d-flex'> {x.name} </span>
-                  <span className='d-flex align-self-center'>
-                    {this.state.idsOfItemClicked.includes(x.id) && (
-                      <i className='fa fa-times' aria-hidden='true' />
-                    )}
-                  </span>
-                </div>
-              );
-            })}
+            {this.state.carTypes
+              .filter((x, index) => index < 6)
+              .map((x) => {
+                return (
+                  <div
+                    key={x.id}
+                    onClick={() => this.toggleItemClicked(x.id, x.brand)}
+                    className='dropdown-item d-inline-flex justify-content-between'
+                  >
+                    <span className='d-flex'> {x.brand} </span>
+                    <span className='d-flex align-self-center'>
+                      {this.state.idsOfItemClicked.includes(x.id) && (
+                        <i className='fa fa-times' aria-hidden='true' />
+                      )}
+                    </span>
+                  </div>
+                );
+              })}
             {this.state.isTextAreaOpen && (
               <MyTextArea textAreaValue={this.state.valueForTextArea} />
             )}

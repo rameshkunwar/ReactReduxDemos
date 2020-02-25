@@ -26,20 +26,20 @@ const App = () => {
     return randomList;
   };
 
-  const [products, setProducts] = useState(generateRandomList(600));
+  // const [products, setProducts] = useState(generateRandomList(600));
 
   const dispatch = useDispatch();
 
   const user = { id: 123, name: "t-rox" };
 
-  const handleProductChange = (changedProduct) => {
-    let newProducts = products.map((product) => {
-      if (product.id == changedProduct.id) {
-        return changedProduct;
-      }
-      return product;
-    });
-  };
+  // const handleProductChange = (changedProduct) => {
+  //   let newProducts = products.map((product) => {
+  //     if (product.id == changedProduct.id) {
+  //       return changedProduct;
+  //     }
+  //     return product;
+  //   });
+  // };
 
   useEffect(() => {
     dispatch(allActions.userActions.setUser(user));
@@ -86,12 +86,12 @@ const App = () => {
         <DropDownWithSelect />
         {/* <MyTextArea /> */}
       </div>
-      <div className='m-3 d-flex justify-content-center'>
+      {/* <div className='m-3 d-flex justify-content-center'>
         <ProductList
           products={products}
           onProductChange={handleProductChange}
         />
-      </div>
+      </div> */}
     </div>
   );
 };
