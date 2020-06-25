@@ -9,6 +9,7 @@ import DropDownWithSelect from "./DropdownWithSelect";
 import ProductList from "./shouldComponentUpdatePerformanceDemo/ProductsList";
 import faker from "faker";
 import DragDrop from "./DragNDrop/DragDrop";
+import { Tweet } from "react-twitter-widgets";
 
 const App = () => {
   const counter = useSelector((state) => state.counter);
@@ -112,6 +113,10 @@ const App = () => {
         </div>
         <div className='col-sm-12 col-xs-12 col-md-6 col-xl-6 my-3'>
           <h4>tweet embed will come here </h4>
+          <Tweet
+            tweetId='1276171862226145281'
+            renderError={(_err) => "could not load tweet! sorry"}
+          />
         </div>
       </div>
     </div>
