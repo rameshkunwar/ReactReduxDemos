@@ -1,10 +1,10 @@
-import currentUser from "./currentUser";
-import counter from "./counter";
+import { currentUser } from "../redux/reducers/currentUser";
+import counter from "../redux/reducers/counter";
 import { combineReducers } from "redux";
 
 const rootReducer = combineReducers({
   currentUser,
-  counter
+  counter,
 });
 
 export default rootReducer;

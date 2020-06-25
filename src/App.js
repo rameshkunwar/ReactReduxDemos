@@ -21,7 +21,7 @@ const App = () => {
         id: faker.random.uuid(),
         title: faker.company.companyName(),
         url: faker.image.imageUrl(),
-        isFavorite: false
+        isFavorite: false,
       });
     }
     return randomList;
@@ -109,6 +109,9 @@ const App = () => {
         {/* drag and drop row */}
         <div className='col-sm-12 col-xs-12 col-md-6 col-xl-6 my-3'>
           <DragDrop />
+        </div>
+        <div className='col-sm-12 col-xs-12 col-md-6 col-xl-6 my-3'>
+          <h4>tweet embed will come here </h4>
         </div>
       </div>
     </div>

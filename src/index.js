@@ -4,12 +4,15 @@ import "./index.css";
 import App from "./App";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
-import rootReducer from "./redux/reducers";
+import rootReducer from "./redux/index";
 import * as serviceWorker from "./serviceWorker";
+import { devToolsEnhancer } from "redux-devtools-extension";
+import { currentUser } from "./redux/reducers/currentUser";
 
 const store = createStore(
   rootReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  devToolsEnhancer()
+  // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
 ReactDOM.render(
